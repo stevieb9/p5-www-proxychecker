@@ -3,12 +3,13 @@ package WWW::ProxyChecker;
 use warnings;
 use strict;
 
-our $VERSION = '0.002';
+# VERSION
+
 use Carp;
 use LWP::UserAgent;
 use IO::Pipe;
-use base 'Class::Data::Accessor';
-__PACKAGE__->mk_classaccessors qw(
+use base 'Class::Accessor::Grouped';
+__PACKAGE__->mk_group_accessors(simple => qw/
     max_kids
     debug
     alive
@@ -16,7 +17,7 @@ __PACKAGE__->mk_classaccessors qw(
     max_working_per_kid
     timeout
     agent
-);
+/);
 
 sub new {
     my $self = bless {}, shift;
@@ -267,7 +268,7 @@ of simultaneous connections that you will have open. B<Defaults to:> C<20>
     ->new( max_working_per_child => 2 );
 
 B<Optional>. Takes a positive integer as a value. Specifies how many
-working proxies each sub proccess should find before aborting (it will
+working proxies each sub process should find before aborting (it will
 also abort if proxy list is exhausted). In other words, setting C<20>
 C<max_kids> and C<max_working_per_child> to C<2> will give you 40 working
 proxies at most, no matter how many are in the original list. Specifying
@@ -327,50 +328,41 @@ will set a new value. All of these return a currently set value:
 
 See C<CONSTRUCTOR> section for more information about these.
 
-=head1 AUTHOR
+=head1 REPOSITORY
 
-Zoffix Znet, C<< <zoffix at cpan.org> >>
-(L<http://zoffix.com>, L<http://haslayout.net>)
+=for pod_spiffy start github section
+
+Fork this module on GitHub:
+L<https://github.com/zoffixznet/WWW-ProxyChecker>
+
+=for pod_spiffy end github section
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-www-proxychecker at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=WWW-ProxyChecker>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+=for pod_spiffy start bugs section
 
-=head1 SUPPORT
+To report bugs or request features, please use
+L<https://github.com/zoffixznet/WWW-ProxyChecker/issues>
 
-You can find documentation for this module with the perldoc command.
+If you can't access GitHub, you can email your request
+to C<bug-WWW-ProxyChecker at rt.cpan.org>
 
-    perldoc WWW::ProxyChecker
+=for pod_spiffy end bugs section
 
-You can also look for information at:
+=head1 AUTHOR
 
-=over 4
+=for pod_spiffy start author section
 
-=item * RT: CPAN's request tracker
+=for pod_spiffy author ZOFFIX
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-ProxyChecker>
+=for text Zoffix Znet <zoffix at cpan.org>
 
-=item * AnnoCPAN: Annotated CPAN documentation
+=for pod_spiffy end author section
 
-L<http://annocpan.org/dist/WWW-ProxyChecker>
+=head1 LICENSE
 
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/WWW-ProxyChecker>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/WWW-ProxyChecker>
-
-=back
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2008 Zoffix Znet, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+You can use and distribute this module under the same terms as Perl itself.
+See the C<LICENSE> file included in this distribution for complete
+details.
 
 =cut
