@@ -1,5 +1,10 @@
 Revision history for WWW-ProxyChecker
 
+1.003   xxx
+        - distribution adopted by Steve Bertrand (STEVEB) on
+          2016-02-04
+        - removed distzilla
+
 1.001001 2014-03-13
         - Maintenance update to fix up failing tests due to
           outdated code usage

@@ -339,30 +339,33 @@ L<https://github.com/zoffixznet/WWW-ProxyChecker>
 
 =head1 BUGS
 
-=for pod_spiffy start bugs section
-
 To report bugs or request features, please use
-L<https://github.com/zoffixznet/WWW-ProxyChecker/issues>
-
-If you can't access GitHub, you can email your request
-to C<bug-WWW-ProxyChecker at rt.cpan.org>
-
-=for pod_spiffy end bugs section
+L<https://github.com/stevieb9/p5-www-proxychecker/issues>
 
 =head1 AUTHOR
 
-=for pod_spiffy start author section
+Steve Bertrand C<< <steveb at cpan.org> >>
 
-=for pod_spiffy author ZOFFIX
+Adopted on Feb 4, 2016 from:
 
-=for text Zoffix Znet <zoffix at cpan.org>
+Zoffix Znet, C<< <zoffix at cpan.org> >>
+(L<http://zoffix.com>, L<http://haslayout.net>)
 
-=for pod_spiffy end author section
+=head1 BUGS
 
-=head1 LICENSE
+Please report any bugs or feature requests to L<https://github.com/stevieb9/p5-www-freeproxylistscom/issues>.
 
-You can use and distribute this module under the same terms as Perl itself.
-See the C<LICENSE> file included in this distribution for complete
-details.
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2016 Steve Bertrand
+
+Copyright 2008 Zoffix Znet, all rights reserved.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See L<http://dev.perl.org/licenses/> for more information.
+
 
 =cut

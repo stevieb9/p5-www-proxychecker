@@ -17,7 +17,8 @@ diag( "Testing WWW::ProxyChecker $WWW::ProxyChecker::VERSION, Perl $], $^X" );
 
 my $o = WWW::ProxyChecker->new;
 isa_ok($o,'WWW::ProxyChecker');
-can_ok($o,qw(    max_kids
+can_ok($o,qw(
+    max_kids
     debug
     alive
     check_sites
@@ -27,4 +28,5 @@ can_ok($o,qw(    max_kids
     new
     check
     _start_checker
-    _check_proxy));
+    _check_proxy)
+);
