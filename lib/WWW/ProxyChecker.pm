@@ -163,6 +163,10 @@ __END__
 
 WWW::ProxyChecker - check whether or not proxy servers are alive
 
+=for html
+<a href="http://travis-ci.org/stevieb9/p5-www-proxychecker"><img src="https://secure.travis-ci.org/stevieb9/p5-www-proxychecker.png"/>
+<a href='https://coveralls.io/github/stevieb9/p5-www-proxychecker?branch=master'><img src='https://coveralls.io/repos/stevieb9/p5-www-proxychecker/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>
+
 =head1 SYNOPSIS
 
     use strict;
