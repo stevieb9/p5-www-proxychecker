@@ -5,7 +5,7 @@ use strict;
 
 # VERSION
 
-our $VERSION = '1.003';
+our $VERSION = '1.004';
 
 use Data::Dumper;
 use Carp;

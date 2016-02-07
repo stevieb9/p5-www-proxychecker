@@ -45,7 +45,7 @@ my %WriteMakefileArgs = (
         "IPC::Open3" => 0,
         "Test::More" => 0
     },
-    "VERSION" => "1.001001",
+    "VERSION_FROM" => 'lib/WWW/ProxyChecker.pm',
     "test" => {
         "TESTS" => "t/*.t"
     }
