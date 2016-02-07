@@ -1,0 +1,9 @@
+Changes
+lib/WWW/ProxyChecker.pm
+Makefile.PL
+MANIFEST			This list of files
+MANIFEST.SKIP
+p5-www-proxychecker.iml
+README
+README.md
+t/00-load.t
