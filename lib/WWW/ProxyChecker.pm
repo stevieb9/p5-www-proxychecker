@@ -5,6 +5,9 @@ use strict;
 
 # VERSION
 
+our $VERSION = '1.003';
+
+use Data::Dumper;
 use Carp;
 use LWP::UserAgent;
 use IO::Pipe;
@@ -330,12 +333,7 @@ See C<CONSTRUCTOR> section for more information about these.
 
 =head1 REPOSITORY
 
-=for pod_spiffy start github section
-
-Fork this module on GitHub:
-L<https://github.com/zoffixznet/WWW-ProxyChecker>
-
-=for pod_spiffy end github section
+L<https://github.com/stevieb9/p5-www-proxychecker>
 
 =head1 BUGS
 
@@ -344,16 +342,12 @@ L<https://github.com/stevieb9/p5-www-proxychecker/issues>
 
 =head1 AUTHOR
 
-Steve Bertrand C<< <steveb at cpan.org> >>
-
-Adopted on Feb 4, 2016 from:
-
 Zoffix Znet, C<< <zoffix at cpan.org> >>
 (L<http://zoffix.com>, L<http://haslayout.net>)
 
-=head1 BUGS
+Adopted on Feb 4, 2016 and currently maintained by:
 
-Please report any bugs or feature requests to L<https://github.com/stevieb9/p5-www-freeproxylistscom/issues>.
+Steve Bertrand C<< <steveb at cpan.org> >>
 
 =head1 COPYRIGHT & LICENSE
 
