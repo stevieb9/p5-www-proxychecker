@@ -161,7 +161,7 @@ __END__
 
 =head1 NAME
 
-WWW::ProxyChecker - check whether or not proxy servers are alive
+WWW::ProxyChecker - Check whether or not proxy servers are alive
 
 =for html
 <a href="http://travis-ci.org/stevieb9/p5-www-proxychecker"><img src="https://secure.travis-ci.org/stevieb9/p5-www-proxychecker.png"/>
