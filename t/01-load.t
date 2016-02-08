@@ -1,9 +1,8 @@
 #!/usr/bin/env perl
-
 use strict;
 use warnings;
 
-use Test::More tests => 7;
+use Test::More;
 
 BEGIN {
     use_ok('Carp');
@@ -31,3 +30,5 @@ can_ok($o,qw(
     _start_checker
     _check_proxy)
 );
+
+done_testing();
