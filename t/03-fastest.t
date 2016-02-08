@@ -35,3 +35,5 @@ my $fastest = $checker->fastest;
 
 print "$_\n" for @$fastest;
 
+done_testing();
+
