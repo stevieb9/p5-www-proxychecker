@@ -35,7 +35,7 @@ my @data;
         push @data, join '', 'http://', join ':', @$_{qw(ip port)};
     }
 
-    for (@{ $checker->check(\@data) }) {
+    for (@{ $checker->check(\@data) }){
         warn "$_ is alive\n";
     }
 

@@ -11,6 +11,8 @@ use Data::Dumper;
 use Carp;
 use LWP::UserAgent;
 use IO::Pipe;
+use Time::HiRes qw(gettimeofday);
+
 use base 'Class::Accessor::Grouped';
 __PACKAGE__->mk_group_accessors(simple => qw/
     max_kids
@@ -56,6 +58,7 @@ sub check {
     my ( $self, $proxies_ref ) = @_;
 
     $self->alive(undef);
+    $self->{fastest} = {};
 
     warn "About to check " . @$proxies_ref . " proxies\n"
         if $self->debug;
@@ -65,7 +68,27 @@ sub check {
     warn @$working_ref . ' out of ' . @$proxies_ref
             . " seem to be alive\n" if $self->debug;
 
-    return $self->alive( $working_ref);
+    return $self->alive($working_ref);
+}
+sub fastest {
+    my $self = shift;
+
+    my @debug_list;
+    my @fastest;
+
+    my %list = %{ $self->{fastest} };
+
+    for my $proxy (sort { $list{$a} <=> $list{$b} } keys %list){
+        $list{$proxy} = sprintf("%.2f", $list{$proxy});
+        push @debug_list, "$proxy :: $list{$proxy}";
+        push @fastest, $proxy;
+    }
+
+    if ($self->debug) {
+        print "$_\n" for @debug_list;
+    }
+
+    return \@fastest;
 }
 sub _start_checker {
     my ( $self, @proxies ) = @_;
@@ -83,6 +106,7 @@ sub _start_checker {
     my @children;
     for my $num ( 1 .. $self->max_kids ) {
         my $pipe = new IO::Pipe;
+        my $time;
 
         if ( my $pid = fork ) { # parent
             $pipe->reader;
@@ -103,7 +127,7 @@ sub _start_checker {
                 warn "Checking $proxy in kid $num\n"
                     if $debug;
 
-                if ( $self->_check_proxy($ua, $proxy, $check_sites_ref) ) {
+                if ($time = $self->_check_proxy($ua, $proxy, $check_sites_ref) ) {
                     push @working, $proxy;
 
                     last
@@ -111,7 +135,7 @@ sub _start_checker {
                             and @working >= $self->max_working_per_kid;
                 }
             }
-            print $pipe "$_\n" for @working;
+            print $pipe "$_ $time\n" for @working;
             exit;
         }
         else { # error
@@ -125,7 +149,9 @@ sub _start_checker {
         my $fh = $children[$num];
         while (<$fh>) {
             chomp;
-            push @working_proxies, $_;
+            my ($proxy, $time) = split;
+            $self->{fastest}{$proxy} = $time if $time != 1;
+            push @working_proxies, $proxy;
         }
     }
 
@@ -135,9 +161,15 @@ sub _check_proxy {
     my ( $self, $ua, $proxy, $sites_ref ) = @_;
 
     $ua->proxy( [ 'http', 'https', 'ftp', 'ftps' ], $proxy);
+
+    my $start = gettimeofday();
+
     my $response = $ua->get( $sites_ref->[rand @$sites_ref] );
-    if ( $response->is_success ) {
-        return 1;
+
+    my $time = gettimeofday() - $start;
+
+    if ( $response->is_success ){
+        return $time;
     }
     else {
         warn "Failed on $proxy " . $response->status_line . "\n"
