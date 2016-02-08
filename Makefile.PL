@@ -35,6 +35,7 @@ my %WriteMakefileArgs = (
         "Class::Accessor::Grouped" => 0,
         "IO::Pipe" => 0,
         "LWP::UserAgent" => 0,
+        "WWW::FreeProxyListsCom" => 0,
         "base" => 0,
         "strict" => 0,
         "warnings" => 0

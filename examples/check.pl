@@ -14,8 +14,6 @@ for ( @{ $checker->check( _make_data() ) } ) {
     print "$_ is alive\n";
 }
 
-
-
 sub _make_data {
     my $prox = [
             {

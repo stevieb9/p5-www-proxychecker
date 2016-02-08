@@ -52,23 +52,21 @@ sub new {
 
     return $self;
 }
-
 sub check {
     my ( $self, $proxies_ref ) = @_;
 
     $self->alive(undef);
 
-    print "About to check " . @$proxies_ref . " proxies\n"
+    warn "About to check " . @$proxies_ref . " proxies\n"
         if $self->debug;
 
     my $working_ref = $self->_start_checker( @$proxies_ref );
 
-    print @$working_ref . ' out of ' . @$proxies_ref
+    warn @$working_ref . ' out of ' . @$proxies_ref
             . " seem to be alive\n" if $self->debug;
 
     return $self->alive( $working_ref);
 }
-
 sub _start_checker {
     my ( $self, @proxies ) = @_;
 
@@ -102,7 +100,7 @@ sub _start_checker {
             my $debug = $self->debug;
             my @working;
             for my $proxy ( @{ $prox{ $num } } ) {
-                print "Checking $proxy in kid $num\n"
+                warn "Checking $proxy in kid $num\n"
                     if $debug;
 
                 if ( $self->_check_proxy($ua, $proxy, $check_sites_ref) ) {
@@ -133,7 +131,6 @@ sub _start_checker {
 
     return \@working_proxies;
 }
-
 sub _check_proxy {
     my ( $self, $ua, $proxy, $sites_ref ) = @_;
 
@@ -143,7 +140,7 @@ sub _check_proxy {
         return 1;
     }
     else {
-        printf "Failed on $proxy (%s)\n", $response->status_line
+        warn "Failed on $proxy " . $response->status_line . "\n"
             if $self->debug;
 
         my $response_code = $response->code;

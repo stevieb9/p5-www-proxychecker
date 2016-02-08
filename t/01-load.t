@@ -10,7 +10,8 @@ BEGIN {
     use_ok('LWP::UserAgent');
     use_ok('IO::Pipe');
     use_ok('Class::Accessor::Grouped');
-	use_ok( 'WWW::ProxyChecker' );
+    use_ok( 'WWW::FreeProxyListsCom' );
+    use_ok( 'WWW::ProxyChecker' );
 }
 
 diag( "Testing WWW::ProxyChecker $WWW::ProxyChecker::VERSION, Perl $], $^X" );
