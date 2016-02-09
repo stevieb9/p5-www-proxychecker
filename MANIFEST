@@ -9,3 +9,4 @@ README.md
 t/00-critic.t
 t/01-load.t
 t/02-check.t
+t/03-fastest.t
