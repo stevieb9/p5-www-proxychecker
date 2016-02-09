@@ -85,7 +85,7 @@ sub fastest {
     }
 
     if ($self->debug) {
-        print "$_\n" for @debug_list;
+        warn "$_\n" for @debug_list;
     }
 
     return \@fastest;

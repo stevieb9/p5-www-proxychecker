@@ -9,13 +9,13 @@ use WWW::ProxyChecker;
 use Test::More;
 
 my $p = WWW::FreeProxyListsCom->new(timeout => 10);
-my $checker = WWW::ProxyChecker->new(debug => 1);
+my $checker = WWW::ProxyChecker->new;
 
 $p->get_list(type => 'us');
 
 my $prox_list;
 
-eval { $prox_list = $p->filter(latency => qr/\d{2,3}$/, is_https => 'false'); };
+eval { $prox_list = $p->filter(is_https => 'false'); };
 
 if ($@){
     plan skip_all => "timeout occurred, skipping";
@@ -33,7 +33,57 @@ $checker->check(\@data);
 
 my $fastest = $checker->fastest;
 
-print "$_\n" for @$fastest;
+if (! @$fastest){
+    plan skip_all => "nothing returned, skipping";
+}
+
+for (@$fastest){
+    like ($_, qr/.*:\d+/, "$_ appears sane");
+}
 
 done_testing();
 
+__END__
+my @list;
+
+$SIG{__WARN__} = sub {
+    my $w = shift;
+    if ($w =~ /.*::\s+\d+\.\d{2}/){
+        push @list, $w;
+    }
+};
+
+if (! @list){
+    plan skip_all => "nothing caught, skipping";
+}
+
+my @times;
+
+for (@list){
+    my ($p, $t) = split /\s+::\s+/;
+
+    like ($p, qr/.*:\d+/, "$p appears sane");
+    like ($t, qr/\d+\.\d{2}/, "$t appears sane");
+
+    push @times, $t;
+}
+
+if (! @times){
+    plan skip_all => "nothing caught, skipping";
+}
+
+my @check;
+
+for (@times){
+    @check = sort { $a <=> $b } @times;
+}
+
+if (! @check){
+    plan skip_all => "nothing caught, skipping";
+}
+
+my $i = 0;
+for (@check){
+    is ($times[$i], $check[$i], "time is in order");
+}
+done_testing();
