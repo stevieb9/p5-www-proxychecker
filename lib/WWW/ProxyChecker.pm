@@ -349,6 +349,13 @@ creative.
 Must be called after a call to C<check()>. Takes no arguments, returns
 the same arrayref last C<check()> returned.
 
+=head2 fastest
+
+    my $fastest = $checker->fastest;
+
+Returns an array reference of alive proxies, ordered by fastest return time
+to slowest.
+
 =head1 ACCESSORS/MUTATORS
 
 The module provides an accessor/mutator for each of the arguments in

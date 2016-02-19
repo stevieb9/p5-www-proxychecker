@@ -1,5 +1,10 @@
 Revision history for WWW-ProxyChecker
 
+1.005   xxx
+        - added fastest(), returns array of successful proxies ordered
+          from fastest to slowest
+        -
+
 1.004   2016-02-07
         - fixed MANIFEST
         - added t/02-check.t
