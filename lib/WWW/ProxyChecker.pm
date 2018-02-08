@@ -5,7 +5,7 @@ use strict;
 
 # VERSION
 
-our $VERSION = '1.005';
+our $VERSION = '1.006';
 
 use Data::Dumper;
 use Carp;
@@ -200,11 +200,12 @@ WWW::ProxyChecker - Check whether or not proxy servers are alive
 
     use strict;
     use warnings;
+
     use WWW::ProxyChecker;
 
-    my $checker = WWW::ProxyChecker->new( debug => 1 );
+    my $checker = WWW::ProxyChecker->new(debug => 1);
 
-    my $working_ref= $checker->check( [ qw(
+    my $working_ref = $checker->check( [ qw(
                 http://221.139.50.83:80
                 http://111.111.12.83:8080
                 http://111.111.12.183:3218
@@ -219,13 +220,34 @@ WWW::ProxyChecker - Check whether or not proxy servers are alive
     print "$_ is alive\n"
         for @$working_ref;
 
-=head1 DESCRIPTION
+    my $fastest = $checker->fastest;
 
-The module provides means to check whether or not HTTP proxies are alive.
-The module was designed more towards "quickly scanning through to get a few"
+    print "fastest to slowest: $_\n" for @$fastest;
+
+    # Used in conjunction with WWW::FreeProxyListsCom, you can easily
+    # find the fastest available proxies automatically
+
+    use WWW::FreeProxyListsCom;
+
+    my $proxy_fetcher = WWW::FreeProxyListsCom->new(timeout => 10);
+    my $checker = WWW::ProxyChecker->new;
+
+    $proxy_fetcher->get_list(type => 'us');
+
+    $fast_to_slow = $proxy_fetcher->filter(is_https => 'true');
+
+    print "$_\n" for @$fast_to_slow;
+
+=head1 DESCRIPTION
+ 
+The module provides means to check whether or not HTTP proxies are alive. It
+was designed more towards "quickly scanning through to get a few"
 than "guaranteed or your money back" therefore there is no 100% guarantee
 that non-working proxies are actually dead and that all of the reported
 working proxies are actually good.
+
+Using this module in conjunction, you can automate finding available proxies,
+even sorting the available ones fastest to slowest.
 
 =head1 CONSTRUCTOR
 
@@ -391,7 +413,7 @@ Steve Bertrand C<< <steveb at cpan.org> >>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2016 Steve Bertrand
+Copyright 2016,2018 Steve Bertrand
 
 Copyright 2008 Zoffix Znet, all rights reserved.
 
