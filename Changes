@@ -3,7 +3,7 @@ Revision history for WWW-ProxyChecker
 1.005   xxx
         - added fastest(), returns array of successful proxies ordered
           from fastest to slowest
-        -
+        - remove perl 5.8 from travis
 
 1.004   2016-02-07
         - fixed MANIFEST
